@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.slide {
+    @apply max-h-[500px]
+}
+
+.slide-active {
+    @apply md:h-[700px] aspect-[9/16] object-fill
+}
+
+.nav-active {
+    animation: toBottom .2s forwards;
+    @apply flex
+}
+
+.to-bottom {
+    animation: toBottom .2s forwards;
+}
+
+@keyframes toBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    } 100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
