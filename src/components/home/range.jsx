@@ -3,7 +3,7 @@ import Title from "../title/title"
 
 const RangeBrowser = () => {
     return (
-        <div className="my-12 mx-4 md:mx-32">
+        <div className="my-12 flex justify-center mx-4 md:mx-32">
             <Container>
                 <Row>
                     <Title>
@@ -11,7 +11,7 @@ const RangeBrowser = () => {
                     </Title>
                     <p className="text-center mt-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque?</p>
                 </Row>
-                <Row className="flex gap-6 mt-16">
+                <Row className="flex md:flex-row flex-col gap-6 mt-16 px-8 md:px-0">
                     <Card>
                         <Card.Img variant="top" src="/assets/img/range-1.png" />
                         <Card.Body>

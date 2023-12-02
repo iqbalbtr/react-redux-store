@@ -16,11 +16,16 @@ const favSlice = createSlice({
         addFromLocalFav: (state, action) => {
             return {
                 ...state,
-                data : action.payload
+                data: action.payload
             }
         }
     }
 })
 
-export const { addFavItem, removeFavItem, addFromLocalFav } = favSlice.actions
+export const {
+    addFavItem,
+    removeFavItem,
+    addFromLocalFav
+} = favSlice.actions
+
 export default favSlice.reducer

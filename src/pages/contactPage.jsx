@@ -1,8 +1,9 @@
-import { Container, Form, Stack } from "react-bootstrap"
+import { Container, Stack } from "react-bootstrap"
 import FooterFeature from "../components/footerFeature"
 import MainHeader from "../components/header"
 import Title from "../components/title/title"
 import MainLayout from "../layouts/mainLayout"
+import ContactForm from "../components/fragments/contactForm"
 
 const ContactPage = () => {
 
@@ -44,32 +45,7 @@ const ContactPage = () => {
                             />
                         </div>
                         <div className=" md:w-[40%]">
-                            <Form className="flex gap-6 flex-col">
-                                <Input
-                                    name="name"
-                                    placeholder="jhon dea"
-                                >
-                                    Your Name
-                                </Input>
-                                <Input
-                                    name="email"
-                                    type="email"
-                                    placeholder="..@gmail.com"
-                                >
-                                    Email address
-                                </Input>
-                                <Input
-                                    name="subject"
-                                    placeholder="..."
-                                >
-                                    Subject
-                                </Input>
-                                <div className="flex flex-col gap-6 w-full">
-                                    <span>Massage</span>
-                                    <textarea rows={8} type="text" placeholder="Hi.. " name="massage" required className="p-4 border border-slate-600 rounded-lg"> </textarea>
-                                </div>
-                                <button type="submit" className="py-4 px-12 w-fit bg-primary text-white">Submit</button>
-                            </Form>
+                            <ContactForm />
                         </div>
                     </div>
                 </Stack>

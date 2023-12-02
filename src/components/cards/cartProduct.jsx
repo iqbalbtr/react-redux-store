@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux"
 import { addToCart, deleteCart, removeItem } from "../../redux/slices/cartSlice"
+import { toUSDCurrency } from "../../utils/usdCurency"
 
 const CartProduct = (props) => {
 
@@ -12,21 +13,21 @@ const CartProduct = (props) => {
     return (
         <tr className="text-[10px] md:text-base">
             <td className="w-[80px] md:w-[150px]">
-                <img className="w-full object-cover md:object-contain aspect-square" src={data.image} alt="" />
+                <img className="w-full object-cover md:object-contain aspect-square" src={data.images[0]} alt="" />
             </td>
             <td className="max-w-[16rem]">
                 {data.title}
             </td>
             <td>
-                {data.price}
+                {toUSDCurrency(data.price)}
             </td>
             <td>
-                <button className="bg-white w-[25px] h-fit" onClick={() => dispatch(addToCart({ id: data.id, price: data.price, qty: 1 }))}>+</button>
+                <button className="bg-white w-[25px] h-fit" onClick={() => dispatch(addToCart({ id : data.id }))}>+</button>
                 <span>{qty}</span>
                 <button className="bg-white w-[25px] h-fit" onClick={() => dispatch(deleteCart({ id: data.id }))}>-</button>
             </td>
             <td className="">
-                {subTotal}
+                {toUSDCurrency(subTotal)}
             </td>
             <td>
                 <button onClick={() => dispatch(removeItem(data.id))}>Del</button>

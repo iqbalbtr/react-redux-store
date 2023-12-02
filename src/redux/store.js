@@ -1,12 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartReducer from "./slices/cartSlice"
 import favReducer from "./slices/favSlice"
+import paginationReducer from "./slices/paginationSlice"
+import categoryReducer from "./slices/categorySlice"
+import userInfoReducer from "./slices/userSlice"
 import { encryptData } from "../utils/encriypt";
 
 const store = configureStore({
     reducer: {
         cart: cartReducer,
-        favorite: favReducer
+        favorite: favReducer, 
+        pagination: paginationReducer,
+        category : categoryReducer,
+        userInfo : userInfoReducer
     }
 })
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import MainLayout from "../layouts/mainLayout"
 import { Outlet } from "react-router-dom"
 
-const ProductPage = () => {
+const ProductLayout = () => {
 
     return (
         <MainLayout>
@@ -11,4 +11,4 @@ const ProductPage = () => {
     )
 }
 
-export default ProductPage
+export default ProductLayout

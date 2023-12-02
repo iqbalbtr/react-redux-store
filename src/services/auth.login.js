@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const getLogin = async (data, callback) => {
-    await axios.post('https://fakestoreapi.com/auth/login', data)
+    await axios.post('https://api.escuelajs.co/api/v1/auth/login', data)
         .then(res => {
             callback(true, res.data)
         })

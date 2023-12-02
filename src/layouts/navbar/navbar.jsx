@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { Container, Navbar } from "react-bootstrap"
+import CardProfile from "../../components/cards/cardProfile"
+import Overlay from "../overlay"
+import { tokenValidation } from "../../utils/tokenValidation"
+import { getUserInfo } from "../../services/auth.user"
+import { addUser } from "../../redux/slices/userSlice"
+import BtnMenu from "../../components/element/button/butonMenu"
 
 const NavBar = () => {
 
@@ -28,6 +34,13 @@ const NavBar = () => {
     const [cartNotif, setCartNotif] = useState(0)
     const [favNotif, setFavNotif] = useState(0)
     const [toggle, setToggle] = useState(false)
+    const [toggleUser, setToggleUser] = useState(false)
+    const [token, setToken] = useState({
+        status : false,
+        token : null,
+        refreshToken : null
+    })
+    const dispacth = useDispatch()
 
     useEffect(() => {
         const sum = cart.reduce((acc, item) => {
@@ -42,8 +55,36 @@ const NavBar = () => {
 
     useEffect(() => {
         setFavNotif(fav.length)
-        console.log(favNotif);
     }, [fav])
+
+    useEffect(() => {
+        tokenValidation((status, token) => {
+            if(status) {
+                setToken({
+                    status : true,
+                    token : token["access_token"],
+                    refreshToken : token["refresh_token"]
+                })
+
+                const req = {
+                    headers : {
+                        "Authorization" : `Bearer ${token["access_token"]}`
+                    }
+                }
+                
+                getUserInfo(req, (status, data) => {
+                    if(status) {
+                        dispacth(addUser(data))
+                    }
+                })
+            } else {
+                setToken({
+                    status : false
+                })
+            }
+        })
+    }, [])
+
 
     return (
         <Navbar className="w-full bg-white">
@@ -64,9 +105,7 @@ const NavBar = () => {
                     </div>
                     <div className="flex gap-3 md:gap-6 justify-center items-center">
                         <button onClick={() => setToggle(cur => !cur)} className="block md:hidden">
-                        <svg xmlns="http://www.w3.org/2000/svg" width={25} viewBox="0 0 24 24" id="bars">
-                            <path d="M3,8H21a1,1,0,0,0,0-2H3A1,1,0,0,0,3,8Zm18,8H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Zm0-5H3a1,1,0,0,0,0,2H21a1,1,0,0,0,0-2Z"></path>
-                        </svg>
+                            <BtnMenu />
                         </button>
                         <Link to="/product/favorite" className="relative">
                             {fav.length > 0 && <span className="absolute text-[10px] text-white bg-red-600 p-0.5 px-1.5 rounded-full -bottom-2 -right-2">{favNotif}</span>}
@@ -80,10 +119,22 @@ const NavBar = () => {
                                 <path fill="black" d="M21.5,15a3,3,0,0,0-1.9-2.78l1.87-7a1,1,0,0,0-.18-.87A1,1,0,0,0,20.5,4H6.8L6.47,2.74A1,1,0,0,0,5.5,2h-2V4H4.73l2.48,9.26a1,1,0,0,0,1,.74H18.5a1,1,0,0,1,0,2H5.5a1,1,0,0,0,0,2H6.68a3,3,0,1,0,5.64,0h2.36a3,3,0,1,0,5.82,1,2.94,2.94,0,0,0-.4-1.47A3,3,0,0,0,21.5,15Zm-3.91-3H9L7.34,6H19.2ZM9.5,20a1,1,0,1,1,1-1A1,1,0,0,1,9.5,20Zm8,0a1,1,0,1,1,1-1A1,1,0,0,1,17.5,20Z"></path>
                             </svg>
                         </Link>
-                        <Link to={"/auth/login"}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width={25} viewBox="0 0 24 24" id="user">
+                        <Link to={token.status ? "" : "/auth/login"} className="relative">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width={25}
+                                viewBox="0 0 24 24"
+                                id="user"
+                                onClick={() => setToggleUser(cur => !cur)}
+                            >
                                 <path d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"></path>
                             </svg>
+                            <Overlay
+                                toggle={toggleUser}
+                                setToggle={setToggleUser}
+                            >
+                                <CardProfile />
+                            </Overlay>
                         </Link>
                     </div>
                 </div>

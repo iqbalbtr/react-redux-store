@@ -1,37 +1,37 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CartProduct from "../components/cards/cartProduct";
 import { useEffect, useState } from "react";
-import { getAllProduct } from "../services/auth.product";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MainHeader from "../components/header";
 import Title from "../components/title/title";
 import { Stack, Table } from "react-bootstrap";
 import FooterFeature from "../components/footerFeature";
 import { FETCH_STATUS } from "../services/statusFetch";
 import Loading from "../components/loading";
+import { getSingleProduct } from "../services/auth.product";
+import { toUSDCurrency } from "../utils/usdCurency";
 
 const Cartpage = ({ setToggle }) => {
 
     const cart = useSelector((state) => state.cart.data)
     const [total, setTotal] = useState([])
-    const [product, setProduct] = useState([])
-
-    const navigate = useNavigate()
     const [status, setStatus] = useState(FETCH_STATUS.IDLE)
+    const encodeUrl = encodeURIComponent(localStorage.getItem("cart"))
 
     useEffect(() => {
         if (cart.length > 0) {
             const sum = cart.reduce((acc, item) => {
-                return acc + item.price * item.qty
+                return acc + item.product.price * item.qty
             }, 0)
-            setTotal(sum.toFixed(2))
+            setTotal(sum)
         }
 
     }, [cart])
 
-
     useEffect(() => {
-        getAllProduct(setProduct, setStatus)
+        cart.forEach(item => {
+
+        })
     }, [])
 
     return (
@@ -63,10 +63,11 @@ const Cartpage = ({ setToggle }) => {
                                 </thead>
                                 <tbody>
                                     {cart.map(data => {
-                                        const existing = product.find(product => product.id === data.id)
-                                        return existing ? (
-                                            <CartProduct key={data.id} data={existing} qty={data.qty} />
-                                        ) : null;
+                                        // const existing = getSingleProduct(cart.product.id)
+                                        // return existing ? (
+                                            
+                                        // ) : null;
+                                        return <CartProduct key={data.id} data={data.product} qty={data.qty} />
                                     })}
                                 </tbody>
                             </Table>
@@ -79,16 +80,18 @@ const Cartpage = ({ setToggle }) => {
                                     <div className="flex flex-col items-end">
                                         {
                                             cart.map(cart => (
-                                                <span key={cart.id}>{cart.qty * cart.price}</span>
+                                                <span key={cart.id}>{toUSDCurrency(cart.qty * cart.product.price)}</span>
                                             ))
                                         }
                                     </div>
                                 </div>
                                 <div className="flex w-full justify-between">
                                     <span>Total : </span>
-                                    <span>{cart.length > 0 && total}</span>
+                                    <span>{cart.length > 0 && toUSDCurrency(total)}</span>
                                 </div>
-                                <button className="p-2 mt-8 px-8 border border-black rounded-md">Checkout</button>
+                                <Link to={`/product/cart/${encodeUrl}`}>
+                                    <button className="p-2 mt-8 px-8 border border-black rounded-md">Checkout</button>
+                                </Link>
                             </div>
                         </>
                     )

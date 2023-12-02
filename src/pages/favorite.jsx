@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { getIdProduct } from "../services/auth.product"
 import { Container } from "react-bootstrap"
 import axios from "axios"
 import Product from "../components/cards/products"

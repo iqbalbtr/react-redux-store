@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import HomePage from "./pages"
 import ProductDetails from "./pages/productDetail"
-import ProductPage from "./pages/productPage"
 import AboutPage from "./pages/aboutPage"
 import LoginForm from "./components/fragments/loginForm"
 import RegisterForm from "./components/fragments/registerForm"
@@ -15,6 +14,9 @@ import ContactPage from "./pages/contactPage"
 import Cartpage from "./pages/cartPage"
 import { addFromLocalFav } from "./redux/slices/favSlice"
 import { decryptData } from "./utils/encriypt"
+import PaymentPage from "./pages/paymentPage"
+import ProductLayout from "./layouts/productLayout"
+import Cartlayout from "./layouts/cartLayout"
 
 function App() {
 
@@ -24,16 +26,17 @@ function App() {
     const getLocalCart = localStorage.getItem("cart")
     const getLocalFav = localStorage.getItem("fav")
 
-    if(getLocalCart !== null) {
+    if (getLocalCart !== null) {
       const cart = decryptData(getLocalCart)
       dispatch(addFromLocal(cart))
     }
-    
 
-    if(getLocalFav !== null) {
-    const fav = decryptData(getLocalFav)
+    if (getLocalFav !== null) {
+      const fav = decryptData(getLocalFav)
       dispatch(addFromLocalFav(fav))
     }
+
+    
 
   }, [])
 
@@ -45,11 +48,14 @@ function App() {
           <Route path="register" element={<RegisterForm />} />
         </Route>
         <Route path="/" element={<HomePage />} />
-        <Route path="/product" element={<ProductPage />} >
+        <Route path="/product" element={<ProductLayout />} >
           <Route index element={<ProductPageIndex />} />
-          <Route path="cart" element={<Cartpage />} />
+          <Route path="cart" element={ <Cartlayout/> } >
+            <Route index element={<Cartpage />} />
+            <Route path=":idPayment" element={<PaymentPage />} />
+          </Route>
           <Route path="favorite" element={<FavoritePage />} />
-          <Route path=":idParams" element={<ProductDetails />} />
+          <Route path=":idProduct" element={<ProductDetails />} />
         </Route>
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/about" element={<AboutPage />} />
