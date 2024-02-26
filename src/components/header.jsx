@@ -1,15 +1,17 @@
+import { motion } from "framer-motion"
 import { Container, Stack } from "react-bootstrap"
 
 const MainHeader = ({ children }) => {
 
     return (
-        <section>
+        <motion.section
+        >
             <Container>
                 <Stack className="w-full min-h-[40vh] flex flex-col gap-6 bg-[url(/assets/img/product-banner.png)] items-center justify-center">
                     {children}
                 </Stack>
             </Container>
-        </section>
+        </motion.section>
     )
 }
 

@@ -4,9 +4,7 @@ import OurProduct from "../components/home/ourProduct"
 import RangeBrowser from "../components/home/range"
 import MainLayout from "../layouts/mainLayout"
 
-
 const HomePage = () => {
-
 
     return (
         <div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
+import { motion } from "framer-motion"
 
 const Inpiration = () => {
 
@@ -21,9 +22,9 @@ const Inpiration = () => {
     const [indexSlide, setIndexSlide] = useState(0)
 
     useEffect(() => {
-        if(indexSlide < 0) {
+        if (indexSlide < 0) {
             setIndexSlide(0)
-        } else if (indexSlide === slideImg.length){
+        } else if (indexSlide === slideImg.length) {
             setIndexSlide(slideImg.length - 1)
         }
     }, [indexSlide])
@@ -32,14 +33,43 @@ const Inpiration = () => {
         <div className="md:py-12 px-8 md:px-24 w-full min-h-[70vh] bg-[#FCF8F3]">
             <Container>
                 <Row className="flex flex-col md:flex-row w-full h-full items-center">
-                    <div className="mw-1/3 min-h-[70vh] flex justify-center items-center">
-                        <div className="flex flex-col gap-4">
+                    <motion.div
+                        initial={{
+                            x: "-50%",
+                            opacity: 0
+                        }}
+                        whileInView={{
+                            x: 0,
+                            opacity: 1
+                        }}
+                        transition={{
+                            duration: 1.4,
+                            ease: "easeInOut"
+                        }}
+                        viewport={{ once: true }}
+                        className="mw-1/3 min-h-[70vh] flex justify-center items-center"
+                    >
+                        <div className="flex flex-col gap-4">z
                             <h1 className="text-5xl font-bold">50+ Beautiful rooms <br />inspiration</h1>
                             <p className="max-w-md">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident cumque laudantium maxime ?</p>
                             <button className="py-2 w-fit px-8 bg-primary text-white">Explore More</button>
                         </div>
-                    </div>
-                    <div className="md:w-[70%] h-[600px] pl-6 overflow-hidden relative">
+                    </motion.div>
+                    <motion.div
+                        initial={{
+                            x: "50%",
+                            opacity: 0
+                        }}
+                        whileInView={{
+                            x: 0,
+                            opacity: 1
+                        }}
+                        transition={{
+                            duration: 0.9,
+                            ease: "easeInOut"
+                        }}
+                        viewport={{ once: true }}
+                        className="md:w-[70%] h-[600px] pl-6 overflow-hidden relative">
                         <div className="flex gap-6">
                             {
                                 slideImg.map((src, i) => (
@@ -81,15 +111,15 @@ const Inpiration = () => {
                         <div className="flex gap-8 absolute bottom-5 right-[30%]">
                             {
                                 [...Array(3)].map((a, i) => {
-                                    if(i === indexSlide) {
+                                    if (i === indexSlide) {
                                         return <div key={i} className="w-[10px] outline outline-1 outline-primary outline-offset-4 aspect-square bg-primary rounded-full"></div>
                                     } else {
-                                        return<div key={i} className="w-[10px] aspect-square bg-slate-400 rounded-full"></div>
+                                        return <div key={i} className="w-[10px] aspect-square bg-slate-400 rounded-full"></div>
                                     }
                                 })
                             }
                         </div>
-                    </div>
+                    </motion.div>
                 </Row>
             </Container>
         </div>

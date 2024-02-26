@@ -17,6 +17,8 @@ const Cartpage = ({ setToggle }) => {
     const [total, setTotal] = useState([])
     const [status, setStatus] = useState(FETCH_STATUS.IDLE)
     const encodeUrl = encodeURIComponent(localStorage.getItem("cart"))
+    const toTop = useScrollToTop()
+    
 
     useEffect(() => {
         if (cart.length > 0) {

@@ -9,6 +9,9 @@ import { getSingleProduct } from "../services/auth.product"
 import { removeFavItem, addFavItem } from "../redux/slices/favSlice"
 import { toUSDCurrency } from "../utils/usdCurency"
 import { encryptData } from "../utils/encriypt"
+import useScrollToTop from "../hooks/useScrollToTop"
+import useFetch from "../hooks/useFetch"
+import axios from "axios"
 
 const ProductDetails = () => {
 
@@ -21,6 +24,7 @@ const ProductDetails = () => {
     const fav = useSelector((state) => state.favorite.data)
     const existing = fav.find(item => item.id == idProduct)
     const encodeUrl = encodeURIComponent(encryptData(product))
+    const toTop = useScrollToTop()
 
     const handleFav = () => {
         if (existing) {

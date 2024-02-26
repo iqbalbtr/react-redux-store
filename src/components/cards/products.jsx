@@ -6,8 +6,9 @@ import { Card, Stack } from "react-bootstrap"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { addFavItem, removeFavItem } from "../../redux/slices/favSlice"
 import { toUSDCurrency } from "../../utils/usdCurency"
+import { motion } from "framer-motion"
 
-const Product = ({ data }) => {
+const Product = ({ index, data }) => {
 
     const dispatch = useDispatch()
     const { id } = data
@@ -26,9 +27,24 @@ const Product = ({ data }) => {
     }
 
     return (
-        <div onClick={() => navigate(`/product/${data.id}`)} className="relative overflow-hidden group z-0">
+        <motion.li
+            initial={{
+                opacity: 0,
+                scale: 0
+            }}
+            animate={{
+                opacity: 1,
+                scale: 1
+            }}
+            transition={{
+                duration: 0.4,
+                delay: index * 0.15,
+                ease: "easeInOut"
+            }}
+            onClick={() => navigate(`/product/${data.id}`)} className="relative overflow-hidden group z-0"
+        >
             <Card className="shadow-lg">
-                <Card.Img variant="top" src={data.images[0]} className="w-full object-contain aspect-square" />
+                <Card.Img variant="top" src={data.images[0]} className="w-full object-contain bg-slate-400 aspect-square" />
                 <Card.Body className="p-6 overflow-hidden flex flex-col bg-slate-100">
                     <Card.Title className="text-xl font-semibold truncate ...">{data.title}</Card.Title>
                     <Card.Text className="text-slate-500">{data.category.name}</Card.Text>
@@ -58,7 +74,7 @@ const Product = ({ data }) => {
                     </div>
                 </Card.Body>
             </Card>
-        </div>
+        </motion.li>
     )
 }
 

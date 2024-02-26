@@ -12,6 +12,8 @@ const FavoritePage = () => {
 
     // data fetch
     const [favorite, setFavorite] = useState([])
+    const toTop = useScrollToTop()
+    
 
     useEffect(() => {
         const fetchData = async () => {

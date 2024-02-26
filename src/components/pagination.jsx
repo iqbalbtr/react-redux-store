@@ -3,6 +3,7 @@ import { Stack } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { getPagination, getPaginationCategory } from "../services/auth.product"
 import { updateOffset } from "../redux/slices/paginationSlice"
+import useScrollToTop from "../hooks/useScrollToTop"
 
 const PaginationList = () => {
 
@@ -12,6 +13,8 @@ const PaginationList = () => {
     const currentPage = calcCurrent === 0 ? 1 : calcCurrent
     const category = useSelector((state) => state.category.data)
     const dispacth = useDispatch()
+    const toTop = useScrollToTop()
+
 
     useEffect(() => {
         if(pagination.status === "default") {
@@ -31,6 +34,7 @@ const PaginationList = () => {
                 }
             })
         }
+        toTop
     }, [pagination])
 
 

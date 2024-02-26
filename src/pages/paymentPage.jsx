@@ -17,6 +17,8 @@ const PaymentPage = () => {
         product : dataCart,
         qty : 1
     })
+    const toTop = useScrollToTop()
+    
 
     const sumTotal = isSingle ? dataCart.price : dataCart.reduce((sum, item) => {
         return sum + item.product.price * item.qty
