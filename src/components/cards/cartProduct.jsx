@@ -1,14 +1,12 @@
 import { useDispatch } from "react-redux"
-import { addToCart, deleteCart, removeItem } from "../../redux/slices/cartSlice"
 import { toUSDCurrency } from "../../utils/usdCurency"
+import { addToCart, deleteCart, removeItem } from "../../redux/slices/cartSlice"
 
 const CartProduct = (props) => {
 
     const dispatch = useDispatch()
     const { data, qty } = props
     const subTotal = qty * data.price
-
-
 
     return (
         <tr className="text-[10px] md:text-base">

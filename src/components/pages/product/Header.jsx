@@ -1,5 +1,5 @@
-import MainHeader from "../header"
-import Title from "../title/title"
+import MainHeader from "../../header"
+import Title from "../../title/title"
 
 const ProductHeader = () => {
 

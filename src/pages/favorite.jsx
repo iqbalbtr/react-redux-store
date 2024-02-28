@@ -5,6 +5,8 @@ import axios from "axios"
 import Product from "../components/cards/products"
 import MainHeader from "../components/header"
 import Title from "../components/title/title"
+import useScrollToTop from "../hooks/useScrollToTop"
+import { PageTransition } from "../components/transition"
 
 const FavoritePage = () => {
 
@@ -33,6 +35,7 @@ const FavoritePage = () => {
 
     return (
         <section>
+            <PageTransition />
             <Container>
                 <MainHeader>
                     <Title>

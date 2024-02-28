@@ -1,5 +1,5 @@
 import Footer from "../components/footer"
-import NavBar from "./navbar/navbar"
+import { NavBar } from "../components/navbar"
 
 const MainLayout = (props) => {
 

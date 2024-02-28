@@ -6,8 +6,10 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './redux/store.js'
 
+const location = window.location
+
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
+  <BrowserRouter location={location} key={location.pathname} >
     <Provider store={store}>
       <React.StrictMode>
         <App />

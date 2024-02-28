@@ -1,12 +1,10 @@
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../../redux/slices/cartSlice"
 import { Link, useNavigate } from "react-router-dom"
-import { useEffect } from "react"
-import { Card, Stack } from "react-bootstrap"
+import { Card } from "react-bootstrap"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { addFavItem, removeFavItem } from "../../redux/slices/favSlice"
 import { toUSDCurrency } from "../../utils/usdCurency"
-import { motion } from "framer-motion"
 
 const Product = ({ index, data }) => {
 
@@ -27,20 +25,7 @@ const Product = ({ index, data }) => {
     }
 
     return (
-        <motion.li
-            initial={{
-                opacity: 0,
-                scale: 0
-            }}
-            animate={{
-                opacity: 1,
-                scale: 1
-            }}
-            transition={{
-                duration: 0.4,
-                delay: index * 0.15,
-                ease: "easeInOut"
-            }}
+        <div
             onClick={() => navigate(`/product/${data.id}`)} className="relative overflow-hidden group z-0"
         >
             <Card className="shadow-lg">
@@ -74,7 +59,7 @@ const Product = ({ index, data }) => {
                     </div>
                 </Card.Body>
             </Card>
-        </motion.li>
+        </div>
     )
 }
 

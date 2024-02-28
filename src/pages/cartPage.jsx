@@ -8,8 +8,9 @@ import { Stack, Table } from "react-bootstrap";
 import FooterFeature from "../components/footerFeature";
 import { FETCH_STATUS } from "../services/statusFetch";
 import Loading from "../components/loading";
-import { getSingleProduct } from "../services/auth.product";
 import { toUSDCurrency } from "../utils/usdCurency";
+import useScrollToTop from "../hooks/useScrollToTop";
+import { PageTransition } from "../components/transition";
 
 const Cartpage = ({ setToggle }) => {
 
@@ -38,6 +39,7 @@ const Cartpage = ({ setToggle }) => {
 
     return (
         <>
+        <PageTransition />
             <MainHeader>
                 <Title>
                     Cart

@@ -1,5 +1,5 @@
 import { Card, Container, Row } from "react-bootstrap"
-import Title from "../title/title"
+import Title from "../../title/title"
 import { motion } from "framer-motion"
 
 const RangeBrowser = () => {
@@ -33,6 +33,7 @@ const RangeBrowser = () => {
                     transition={{
                         duration: 1.5
                     }}
+                    viewport={{once: true}}
                 >
                     <Title>
                         Browse The Range
@@ -73,4 +74,5 @@ const RangeBrowser = () => {
         </div>
     )
 }
+
 export default RangeBrowser

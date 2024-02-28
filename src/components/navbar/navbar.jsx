@@ -2,12 +2,11 @@ import { useEffect, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { Container, Navbar } from "react-bootstrap"
-import CardProfile from "../../components/cards/cardProfile"
-import Overlay from "../overlay"
+import CardProfile from "../cards/cardProfile"
 import { tokenValidation } from "../../utils/tokenValidation"
-import { getUserInfo } from "../../services/auth.user"
-import { addUser } from "../../redux/slices/userSlice"
-import BtnMenu from "../../components/element/button/butonMenu"
+import BtnMenu from "../element/button/butonMenu"
+import { Overlay } from "../../layouts"
+import { motion } from "framer-motion"
 
 const NavBar = () => {
 
@@ -36,9 +35,9 @@ const NavBar = () => {
     const [toggle, setToggle] = useState(false)
     const [toggleUser, setToggleUser] = useState(false)
     const [token, setToken] = useState({
-        status : false,
-        token : null,
-        refreshToken : null
+        status: false,
+        token: null,
+        refreshToken: null
     })
     const dispacth = useDispatch()
 
@@ -59,27 +58,27 @@ const NavBar = () => {
 
     useEffect(() => {
         tokenValidation((status, token) => {
-            if(status) {
+            if (status) {
                 setToken({
-                    status : true,
-                    token : token["access_token"],
-                    refreshToken : token["refresh_token"]
+                    status: true,
+                    token: token["access_token"],
+                    refreshToken: token["refresh_token"]
                 })
 
                 const req = {
-                    headers : {
-                        "Authorization" : `Bearer ${token["access_token"]}`
+                    headers: {
+                        "Authorization": `Bearer ${token["access_token"]}`
                     }
                 }
-                
+
                 getUserInfo(req, (status, data) => {
-                    if(status) {
+                    if (status) {
                         dispacth(addUser(data))
                     }
                 })
             } else {
                 setToken({
-                    status : false
+                    status: false
                 })
             }
         })
@@ -97,9 +96,19 @@ const NavBar = () => {
                         className={`md:flex hidden ${toggle ? "nav-active" : ""} md:flex-row rounded-md flex-col md:gap-12 gap-4 md:p-0 p-6 md:top-0 md:right-0 opacity-0 md:opacity-100 top-16 md:relative right-28  md:bg-transparent md:items-center absolute bg-background`}>
                         {
                             navLink.map(link => (
-                                <NavLink to={link.path} key={link.id}>
-                                    {link.name}
-                                </NavLink>
+                                <div
+                                    key={link.id}
+                                    className="relative group"
+                                >
+                                  
+                                    <NavLink
+                                        to={link.path}
+                                        className="relative w-fit block after:block after:content-[''] after:absolute after:h-[2px] after:bg-primary after:w-full after:scale-x-0 after:hover:scale-x-100 after:transition after:duration-300 after:origin-left"
+                                    >
+                                        {link.name}
+                                    </NavLink>
+                                </div>
+
                             ))
                         }
                     </div>
