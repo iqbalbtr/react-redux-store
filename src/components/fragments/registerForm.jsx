@@ -6,7 +6,7 @@ const RegisterForm = () => {
     return (
         <form action="" className="bg-primary p-8 w-[400px] rounded-md text-white">
             <h1 className="text-4xl font-semibold mb-2 text-white">Login</h1>
-            <span>Login to your account!</span>
+            <span>Register to your account!</span>
             <div
                 className="flex  mt-8 flex-col gap-2"
             >
