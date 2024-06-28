@@ -4,7 +4,7 @@ import { PageTransition } from '../components/transition'
 
 function ProductPage() {
     return (
-        <div>
+        <div className='w-full'>
             <PageTransition />
             <HeaderProduct />
             <NavProduct />

@@ -11,6 +11,7 @@ import Loading from "../components/loading";
 import { toUSDCurrency } from "../utils/usdCurency";
 import useScrollToTop from "../hooks/useScrollToTop";
 import { PageTransition } from "../components/transition";
+import { motion } from "framer-motion";
 
 const Cartpage = ({ setToggle }) => {
 
@@ -19,7 +20,7 @@ const Cartpage = ({ setToggle }) => {
     const [status, setStatus] = useState(FETCH_STATUS.IDLE)
     const encodeUrl = encodeURIComponent(localStorage.getItem("cart"))
     const toTop = useScrollToTop()
-    
+
 
     useEffect(() => {
         if (cart.length > 0) {
@@ -39,7 +40,7 @@ const Cartpage = ({ setToggle }) => {
 
     return (
         <>
-        <PageTransition />
+            <PageTransition />
             <MainHeader>
                 <Title>
                     Cart
@@ -53,8 +54,8 @@ const Cartpage = ({ setToggle }) => {
                     status === "loading" ? (
                         <Loading />
                     ) : (
-                        <>
-                            <Table cellPadding={15} className="md:w-auto w-full px-2" >
+                        <div className="overflow-x-auto w-full flex flex-col md:flex-row gap-12 justify-center items-center">
+                            <Table cellPadding={15} className="md:w-auto bg-red px-2" >
                                 <thead className="bg-[#F9F1E7]">
                                     <tr>
                                         <td></td>
@@ -63,14 +64,11 @@ const Cartpage = ({ setToggle }) => {
                                         <td>Quantity</td>
                                         <td colSpan={4} className="hidden md:block">Sub Total</td>
                                         <td></td>
+                                        <td></td>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody className="table-auto overflow-x-auto">
                                     {cart.map(data => {
-                                        // const existing = getSingleProduct(cart.product.id)
-                                        // return existing ? (
-                                            
-                                        // ) : null;
                                         return <CartProduct key={data.id} data={data.product} qty={data.qty} />
                                     })}
                                 </tbody>
@@ -94,10 +92,18 @@ const Cartpage = ({ setToggle }) => {
                                     <span>{cart.length > 0 && toUSDCurrency(total)}</span>
                                 </div>
                                 <Link to={`/product/cart/${encodeUrl}`}>
-                                    <button className="p-2 mt-8 px-8 border border-black rounded-md">Checkout</button>
+                                    <motion.button
+                                        whileHover={{
+                                            background: "orange",
+                                            border: "none"
+                                        }}
+                                        className="p-2 mt-8 px-8  rounded-md bg-slate-700 text-white"
+                                    >
+                                        Checkout
+                                    </motion.button>
                                 </Link>
                             </div>
-                        </>
+                        </div>
                     )
                 }
             </Stack>

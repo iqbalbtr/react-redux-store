@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import MainLayout from "./MainLayout"
+import MainLayout from "./mainLayout"
 import { Outlet } from "react-router-dom"
 
 const ProductLayout = () => {

@@ -21,7 +21,6 @@ const NavProduct = () => {
 
     return (
         <nav>
-            <Container>
                 <Stack className="md:px-24 px-4 w-full py-4 bg-[#F9F1E7]">
                     <div className="w-full flex-col md:flex-row gap-6 flex justify-between items-center">
                         <div className="flex justify-center items-center gap-6">
@@ -49,7 +48,6 @@ const NavProduct = () => {
                         </div>
                     </div>
                 </Stack>
-            </Container>
         </nav>
     )
 }

@@ -27,6 +27,7 @@ const Inpiration = () => {
         } else if (indexSlide === slideImg.length) {
             setIndexSlide(slideImg.length - 1)
         }
+        console.log(indexSlide)
     }, [indexSlide])
 
     return (
@@ -49,7 +50,7 @@ const Inpiration = () => {
                         viewport={{ once: true }}
                         className="mw-1/3 min-h-[70vh] flex justify-center items-center"
                     >
-                        <div className="flex flex-col gap-4">z
+                        <div className="flex flex-col gap-4">
                             <h1 className="text-5xl font-bold">50+ Beautiful rooms <br />inspiration</h1>
                             <p className="max-w-md">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident cumque laudantium maxime ?</p>
                             <button className="py-2 w-fit px-8 bg-primary text-white">Explore More</button>
@@ -81,14 +82,18 @@ const Inpiration = () => {
                                 ))
                             }
                         </div>
-                        <div
-                            className="w-[50px] aspect-square absolute left-5 top-1/2 -translate-x-1/2 bg-white shadow-lg flex justify-center items-center rounded-full"
-                            onClick={() => setIndexSlide(cur => cur - 1)}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={25} id="angle-left-b">
-                                <path fill="#B88E2F" d="m8.5 12.8 5.7 5.6c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4l-4.9-5 4.9-5c.4-.4.4-1 0-1.4-.2-.2-.4-.3-.7-.3-.3 0-.5.1-.7.3l-5.7 5.6c-.4.5-.4 1.1 0 1.6 0-.1 0-.1 0 0z"></path>
-                            </svg>
-                        </div>
+                        {
+                            indexSlide > 0 && (
+                                <div
+                                    className="w-[50px] aspect-square absolute left-5 top-1/2 -translate-x-1/2 bg-white shadow-lg flex justify-center items-center rounded-full"
+                                    onClick={() => setIndexSlide(cur => cur - 1)}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={25} id="angle-left-b">
+                                        <path fill="#B88E2F" d="m8.5 12.8 5.7 5.6c.4.4 1 .4 1.4 0 .4-.4.4-1 0-1.4l-4.9-5 4.9-5c.4-.4.4-1 0-1.4-.2-.2-.4-.3-.7-.3-.3 0-.5.1-.7.3l-5.7 5.6c-.4.5-.4 1.1 0 1.6 0-.1 0-.1 0 0z"></path>
+                                    </svg>
+                                </div>
+                            )
+                        }
                         <div className="absolute w-[250px] flex justify-center items-end bottom-5 left-12 h-[120px]">
                             <div className="w-[220px] flex flex-col justify-center p-8 bottom-5 left-12 h-[120px] bg-white/80">
                                 <span className="font-semibold">01 - Bed Room</span>
@@ -100,14 +105,18 @@ const Inpiration = () => {
                                 </svg>
                             </div>
                         </div>
-                        <div
-                            className="w-[50px] aspect-square absolute md:right-5 -right-5 top-1/2 -translate-x-1/2 bg-white shadow-lg flex justify-center items-center rounded-full"
-                            onClick={() => setIndexSlide(cur => cur + 1)}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={25} id="angle-right-b">
-                                <path fill="#B88E2F" d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z"></path>
-                            </svg>
-                        </div>
+                        {
+                            indexSlide < 2 && (
+                                <div
+                                    className="w-[50px] aspect-square absolute md:right-5 -right-5 top-1/2 -translate-x-1/2 bg-white shadow-lg flex justify-center items-center rounded-full"
+                                    onClick={() => setIndexSlide(cur => cur + 1)}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={25} id="angle-right-b">
+                                        <path fill="#B88E2F" d="M15.54,11.29,9.88,5.64a1,1,0,0,0-1.42,0,1,1,0,0,0,0,1.41l4.95,5L8.46,17a1,1,0,0,0,0,1.41,1,1,0,0,0,.71.3,1,1,0,0,0,.71-.3l5.66-5.65A1,1,0,0,0,15.54,11.29Z"></path>
+                                    </svg>
+                                </div>
+                            )
+                        }
                         <div className="flex gap-8 absolute bottom-5 right-[30%]">
                             {
                                 [...Array(3)].map((a, i) => {

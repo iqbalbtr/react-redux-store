@@ -7,7 +7,7 @@ const PaymentForm = () => {
         <Form>
             <Stack className="flex flex-col gap-4">
                 <h1 className="text-3xl font-bold mb-12">Billing details</h1>
-                <div className="flex justify-between gap-8">
+                <div className="flex w-full justify-between gap-8 flex-col md:flex-row">
                     <Input>
                         Fist Name
                     </Input>

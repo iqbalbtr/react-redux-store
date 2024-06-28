@@ -33,7 +33,7 @@ const RegisterForm = () => {
                 </div>
                 <div className="flex flex-col gap-1 ">
                     <label className="text-xl" htmlFor="">Passoword</label>
-                    <div className="text-white relative text-black">
+                    <div className="text-white relative ">
                         <svg
                             className="absolute top-1/2 right-4 -translate-y-1/2"
                             xmlns="http://www.w3.org/2000/svg"
